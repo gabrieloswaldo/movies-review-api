@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.*;
 import java.math.BigInteger;
 
 @AllArgsConstructor
@@ -16,8 +17,13 @@ import java.math.BigInteger;
 @Builder
 public class CreateScoreDTO {
 
+    @NotBlank
+    @Size(max = 20)
     private String movieId;
 
+    @NotNull
+    @Max(10)
+    @Min(0)
     private Double value;
 
     // TODO: remove when change to jwt
