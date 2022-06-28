@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigInteger;
+
 @Service
 public class CommentServiceImpl implements CommentService {
 
@@ -26,5 +28,10 @@ public class CommentServiceImpl implements CommentService {
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "User invalid!")
         );
         return commentRepository.save(CreateCommentDTO.toEntity(commentRequest, user));
+    }
+
+    @Override
+    public void delete(BigInteger commentId) {
+        commentRepository.deleteById(commentId);
     }
 }

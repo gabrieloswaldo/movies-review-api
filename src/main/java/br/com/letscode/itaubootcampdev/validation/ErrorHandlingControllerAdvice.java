@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,19 @@ public class ErrorHandlingControllerAdvice {
                                 fieldError, LocaleContextHolder.getLocale()))
                         .build()
         ));
+        return validationErrors;
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    List<ValidationErrorDTO> handleConstraintViolationException(ConstraintViolationException e) {
+        List<ValidationErrorDTO> validationErrors = new ArrayList<>();
+        e.getConstraintViolations().forEach(
+                violation -> validationErrors.add(ValidationErrorDTO.builder()
+                        .fieldName(violation.getPropertyPath().toString())
+                        .message(violation.getMessage())
+                        .build())
+        );
         return validationErrors;
     }
 }
