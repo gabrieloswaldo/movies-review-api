@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigInteger;
+import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -33,5 +34,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void delete(BigInteger commentId) {
         commentRepository.deleteById(commentId);
+    }
+
+    @Override
+    public Optional<Comment> findById(BigInteger commentId) {
+        return commentRepository.findById(commentId);
     }
 }
