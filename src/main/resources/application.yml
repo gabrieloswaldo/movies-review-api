@@ -4,11 +4,6 @@ spring:
   jpa:
     open-in-view: true
 
-server:
-  error:
-    include-binding-errors: always
-    include-message: always
-
 imdb-api:
   url: "http://www.omdbapi.com/?apikey="
   key: "49d7ae63"
