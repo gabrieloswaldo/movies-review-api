@@ -26,9 +26,6 @@ public class CreateReplyDTO {
     @Size(max = 255)
     private String text;
 
-    // TODO: remove when change to jwt
-    private BigInteger userId;
-
     public static CreateReplyDTO fromEntity(Reply reply) {
         return CreateReplyDTO.builder()
                 .movieId(reply.getId().getResponseComment().getMovieId())

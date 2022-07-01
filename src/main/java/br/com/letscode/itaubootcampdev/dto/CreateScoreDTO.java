@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
-import java.math.BigInteger;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,23 +25,20 @@ public class CreateScoreDTO {
     @Min(0)
     private Double value;
 
-    // TODO: remove when change to jwt
-    private BigInteger userId;
-
-    public static CreateScoreDTO fromEntity(Score scoreCreated) {
+    public static CreateScoreDTO fromEntity(Score scoreEntity) {
         return CreateScoreDTO.builder()
-                .movieId(scoreCreated.getId().getMovieId())
-                .value(scoreCreated.getValue())
+                .movieId(scoreEntity.getId().getMovieId())
+                .value(scoreEntity.getValue())
                 .build();
     }
 
-    public static Score toEntity(CreateScoreDTO scoreRequest, User user) {
+    public static Score toEntity(CreateScoreDTO scoreDTO, User user) {
         return Score.builder()
                 .id(ScorePk.builder()
-                        .movieId(scoreRequest.getMovieId())
+                        .movieId(scoreDTO.getMovieId())
                         .user(user)
                         .build())
-                .value(scoreRequest.getValue())
+                .value(scoreDTO.getValue())
                 .build();
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -65,5 +66,10 @@ public class AuthServiceImpl implements AuthService {
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
         BigInteger userId = BigInteger.valueOf(Long.parseLong(claims.getSubject()));
         return userRepository.findById(userId).get();
+    }
+
+    @Override
+    public User getAuthenticatedUser() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

@@ -8,7 +8,6 @@ import lombok.Getter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.math.BigInteger;
 
 @Getter
 @Builder
@@ -21,9 +20,6 @@ public class CreateCommentDTO {
     @NotNull
     @Size(max = 255)
     private String text;
-
-    // TODO: remove when change to jwt
-    private BigInteger userId;
 
     public static CreateCommentDTO fromEntity(Comment comment) {
         return CreateCommentDTO.builder()

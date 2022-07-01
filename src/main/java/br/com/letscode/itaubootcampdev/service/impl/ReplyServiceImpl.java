@@ -29,8 +29,8 @@ public class ReplyServiceImpl implements ReplyService {
         Comment responseComment = commentService.create(CreateCommentDTO.builder()
                 .movieId(replyRequest.getMovieId())
                 .text(replyRequest.getText())
-                .userId(replyRequest.getUserId())
                 .build());
+
         return replyRepository.save(CreateReplyDTO.toEntity(parentComment, responseComment));
     }
 }

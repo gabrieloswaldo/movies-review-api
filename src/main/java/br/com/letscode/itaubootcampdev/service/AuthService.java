@@ -12,4 +12,6 @@ public interface AuthService {
     boolean isTokenValid(String token);
 
     User getUserFromToken(String token);
+
+    User getAuthenticatedUser();
 }
