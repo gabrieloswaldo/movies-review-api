@@ -1,0 +1,14 @@
+version: "3"
+services:
+  db:
+    image: 'postgres:13.7-alpine'
+    container_name: movies-review-db
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+      - POSTGRES_DB=movies-review-db
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
